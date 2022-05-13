@@ -1,3 +1,5 @@
+import path from 'path';
+
 let types = {
     media: ["mp4", "mkv", "mp3"],
     archives: ['zip', '7z', 'rar', 'tar', 'gz', 'ar', 'iso', "xz"],
@@ -6,17 +8,16 @@ let types = {
     // shellScript: ['sh', 'zsh', 'fish']
 }
 
-let path = require('path');
 
-function returnFolderName(fileName) {
+function getExtensionName(filePath) {
 
     // M-1
-    // let idx = fileName.lastIndexOf(".");
-    // let extension = fileName.slice(idx + 1);
+    // let idx = filePath.lastIndexOf(".");
+    // let extension = filePath.slice(idx + 1);
 
     // M-2
-    let extension = path.extname(fileName);
-    extensionName = extension.slice(1); // because dot has to be removed from extension name
+    let extension = path.extname(filePath);
+    let extensionName = extension.slice(1); // because dot has to be removed from extension name
 
     let res = "others"
     for (let key in types) {
@@ -29,12 +30,12 @@ function returnFolderName(fileName) {
         }
     }
 
-    console.log(res);
+    return res;
 }
 
-returnFolderName("resume.docx"); //-> document
-returnFolderName("xyz.abc"); //-> others
-returnFolderName("cli.sh")
+// returnFolderName("resume.docx"); //-> document
+// returnFolderName("xyz.abc"); //-> others
+// returnFolderName("cli.sh")
 
 // organize
 // organizedFiles
@@ -43,3 +44,7 @@ returnFolderName("cli.sh")
 //         documents
 //         app
 //         other 
+
+export {
+    getExtensionName
+}
